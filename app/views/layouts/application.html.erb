@@ -1,16 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Travel Aggregator" %></title>
+    <title><%= content_for(:title) || "Мои рецепты" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Travel Aggregator">
+    <meta name="application-name" content="Мои рецепты">
     <meta name="mobile-web-app-capable" content="yes">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= yield :head %>
-
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
     <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
@@ -23,6 +18,16 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header class="site-header">
+      <div class="site-header__content">
+        <%= link_to "Мои рецепты", root_path, class: "site-name" %>
+        <nav aria-label="Навигация">
+          <%= link_to "Главная", root_path, class: "nav-link #{'nav-link--active' if controller_path == 'recipes' && action_name == 'home'}" %>
+          <%= link_to "Все рецепты", recipes_path, class: "nav-link #{'nav-link--active' if controller_path == 'recipes' && action_name == 'index'}" %>
+          <%= link_to "Админка", admin_recipes_path, class: "nav-link #{'nav-link--active' if controller_path == 'admin/recipes'}" %>
+        </nav>
+      </div>
+    </header>
+    <main class="page"><%= yield %></main>
   </body>
 </html>
