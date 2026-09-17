@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_17_211717) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_17_215039) do
   create_table "categories", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name", null: false
@@ -23,6 +23,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_17_211717) do
     t.string "name", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_ingredients_on_name", unique: true
+  end
+
+  create_table "recipe_ingredients", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "ingredient_id", null: false
+    t.string "quantity", null: false
+    t.integer "recipe_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ingredient_id"], name: "index_recipe_ingredients_on_ingredient_id"
+    t.index ["recipe_id", "ingredient_id"], name: "index_recipe_ingredients_on_recipe_id_and_ingredient_id", unique: true
+    t.index ["recipe_id"], name: "index_recipe_ingredients_on_recipe_id"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -38,5 +49,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_17_211717) do
     t.index ["category_id"], name: "index_recipes_on_category_id"
   end
 
+  add_foreign_key "recipe_ingredients", "ingredients"
+  add_foreign_key "recipe_ingredients", "recipes"
   add_foreign_key "recipes", "categories"
 end
