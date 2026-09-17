@@ -1,0 +1,15 @@
+<article class="recipe-card">
+  <% if recipe.image_url.present? %>
+    <%= image_tag recipe.image_url, alt: recipe.title, class: "recipe-card__image" %>
+  <% else %>
+    <div class="recipe-card__image recipe-card__image--empty">Фото не указано</div>
+  <% end %>
+  <div class="recipe-card__content">
+    <p class="recipe-card__category"><%= recipe.category.name %></p>
+    <h2><%= recipe.title %></h2>
+    <div class="recipe-card__footer">
+      <p class="recipe-card__time"><%= recipe.cooking_time %> минут</p>
+      <%= link_to "Открыть", recipe_path(recipe), class: "button" %>
+    </div>
+  </div>
+</article>

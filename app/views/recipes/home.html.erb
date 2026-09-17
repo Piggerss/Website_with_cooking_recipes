@@ -1,0 +1,33 @@
+<% content_for :title, "Мои рецепты" %>
+
+<section class="home-hero">
+  <div class="home-hero__content">
+    <h1>Что приготовим сегодня?</h1>
+    <p>Вкусные и проверенные рецепты для всей семьи.<br>Готовьте с удовольствием!</p>
+  </div>
+
+  <svg class="home-hero__illustration" viewBox="0 0 390 260" aria-hidden="true" focusable="false">
+    <path d="M206 209V84c0-17 13-30 30-30s30 13 30 30v125" />
+    <path d="M187 209h99M221 54v-16h30v16M224 120h24M224 151h24" />
+    <path d="M87 210V119h62v91M99 210v-40h38v40M103 119c0-22 17-40 39-40s39 18 39 40" />
+    <path d="M55 211h286M288 211c0-30 24-54 54-54M342 157v54" />
+    <path d="M300 157c-16-16-16-42 0-58 16 16 16 42 0 58ZM337 157c-16-16-16-42 0-58 16 16 16 42 0 58Z" />
+    <path d="M111 79V47M93 79c0-15 8-27 18-34 10 7 18 19 18 34" />
+  </svg>
+</section>
+
+<section class="category-panel" aria-labelledby="home-categories-title">
+  <h2 id="home-categories-title">Категории</h2>
+  <nav class="category-links" aria-label="Категории рецептов">
+    <% @categories.each do |category| %>
+      <%= link_to category.name, recipes_path(category_id: category.id), class: "category-link" %>
+    <% end %>
+  </nav>
+</section>
+
+<section class="latest-recipes" aria-labelledby="latest-recipes-title">
+  <h2 id="latest-recipes-title">Новые рецепты</h2>
+  <div class="recipe-grid">
+  <%= render partial: "card", collection: @recipes, as: :recipe %>
+  </div>
+</section>

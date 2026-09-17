@@ -1,0 +1,26 @@
+<% content_for :title, "#{@recipe.title} — Мои рецепты" %>
+
+<article class="recipe-detail">
+  <%= link_to "← Все рецепты", recipes_path, class: "breadcrumb" %>
+  <div class="recipe-detail__top">
+    <%= image_tag @recipe.image_url, alt: @recipe.title, class: "recipe-detail__image" if @recipe.image_url.present? %>
+    <div class="recipe-detail__content">
+      <p class="recipe-detail__category"><%= @recipe.category.name %></p>
+      <h1><%= @recipe.title %></h1>
+      <dl class="recipe-facts">
+        <div><dt>Время приготовления</dt><dd><%= @recipe.cooking_time %> мин.</dd></div>
+        <div><dt>Сложность</dt><dd><%= @recipe.difficulty %></dd></div>
+      </dl>
+      <section><h2>Описание</h2><p><%= @recipe.description %></p></section>
+    </div>
+  </div>
+
+  <section class="instructions-section">
+    <h2>Шаги приготовления</h2>
+    <ol class="instructions-list">
+      <% @recipe.instructions.each_line.map(&:strip).reject(&:blank?).each do |step| %>
+        <li><%= step %></li>
+      <% end %>
+    </ol>
+  </section>
+</article>

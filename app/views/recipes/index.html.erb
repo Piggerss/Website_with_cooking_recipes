@@ -1,0 +1,14 @@
+<% content_for :title, "Все рецепты — Мои рецепты" %>
+
+<section class="page-heading">
+  <h1><%= @category&.name || "Все рецепты" %></h1>
+  <div class="filters" aria-label="Фильтры рецептов">
+    <% @categories.each do |category| %>
+      <%= link_to category.name, recipes_path(category_id: category.id), class: "filter-button #{'filter-button--active' if params[:category_id].to_s == category.id.to_s}" %>
+    <% end %>
+  </div>
+</section>
+
+<section class="recipe-grid" aria-label="Рецепты">
+  <%= render partial: "card", collection: @recipes, as: :recipe %>
+</section>
