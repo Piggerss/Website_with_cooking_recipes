@@ -32,11 +32,6 @@ class Admin::RecipesController < ApplicationController
 
   private
 
-  def require_admin
-    # Временная заглушка — доступ пока открыт.
-    # Реальную проверку добавим в Коммите 5 (admin authentication).
-  end
-
   def set_categories
     @categories = Category.order(:id)
   end

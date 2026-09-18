@@ -1,0 +1,27 @@
+<% content_for :title, "Вход в админку — Мои рецепты" %>
+
+<section class="form-page auth-page">
+  <h1>Вход в админку</h1>
+
+  <% if @login_failed %>
+    <div class="form-errors"><p>Неверный логин или пароль.</p></div>
+  <% end %>
+
+  <form action="<%= login_path %>" method="post" class="recipe-form">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+    <div class="form-field">
+      <label for="login">Логин</label>
+      <input id="login" name="login" type="text" autocomplete="username" required>
+    </div>
+
+    <div class="form-field">
+      <label for="password">Пароль</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+    </div>
+
+    <div class="form-actions">
+      <input type="submit" value="Войти">
+    </div>
+  </form>
+</section>
