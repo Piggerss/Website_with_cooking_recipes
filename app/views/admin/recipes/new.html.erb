@@ -1,0 +1,28 @@
+<% content_for :title, "Добавить рецепт — Мои рецепты" %>
+
+<section class="form-page">
+  <h1>Добавить рецепт</h1>
+  <% if @recipe.errors.any? %>
+    <div class="form-errors"><p>Проверьте форму:</p><ul><% @recipe.errors.full_messages.each do |message| %><li><%= message %></li><% end %></ul></div>
+  <% end %>
+  <form action="<%= admin_recipes_path %>" method="post" class="recipe-form">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <div class="form-field"><label for="recipe_title">Название</label><input id="recipe_title" name="recipe[title]" type="text" value="<%= @recipe.title %>"></div>
+    <div class="form-field">
+      <label for="recipe_category_id">Категория</label>
+      <select id="recipe_category_id" name="recipe[category_id]" required>
+        <option value="">Выберите категорию</option>
+        <% @categories.each do |category| %>
+          <option value="<%= category.id %>" <%= "selected" if @recipe.category_id == category.id %>><%= category.name %></option>
+        <% end %>
+      </select>
+    </div>
+    <div class="form-field"><label for="recipe_cooking_time">Время приготовления в минутах</label><input id="recipe_cooking_time" min="1" name="recipe[cooking_time]" type="number" value="<%= @recipe.cooking_time %>"></div>
+    <div class="form-field"><label for="recipe_difficulty">Сложность</label><input id="recipe_difficulty" name="recipe[difficulty]" type="text" value="<%= @recipe.difficulty %>"></div>
+    <div class="form-field"><label for="recipe_image_url">Ссылка на фото</label><input id="recipe_image_url" name="recipe[image_url]" type="url" value="<%= @recipe.image_url %>"></div>
+    <div class="form-field"><label for="recipe_description">Описание</label><textarea id="recipe_description" name="recipe[description]" rows="4"><%= @recipe.description %></textarea></div>
+    <div class="form-field"><label for="recipe_instructions">Шаги приготовления</label><textarea id="recipe_instructions" name="recipe[instructions]" rows="6"><%= @recipe.instructions %></textarea></div>
+    <div class="form-field"><label for="ingredients_text">Ингредиенты</label><textarea id="ingredients_text" name="ingredients_text" placeholder="Творог — 500 г&#10;Яйцо — 2 шт.&#10;Мука — 100 г" rows="6"><%= @ingredients_text %></textarea></div>
+    <div class="form-actions"><input class="button" type="submit" value="Сохранить рецепт"><%= link_to "Отмена", admin_recipes_path, class: "button button--secondary" %></div>
+  </form>
+</section>
