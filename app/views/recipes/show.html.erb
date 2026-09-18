@@ -12,6 +12,18 @@
         <div><dt>Сложность</dt><dd><%= @recipe.difficulty %></dd></div>
       </dl>
       <section><h2>Описание</h2><p><%= @recipe.description %></p></section>
+
+      <section>
+        <h2>Ингредиенты</h2>
+        <ul class="ingredients-list">
+          <% @recipe.recipe_ingredients.includes(:ingredient).each do |ri| %>
+            <li>
+              <span><%= ri.ingredient.name %></span>
+              <span><%= ri.quantity %></span>
+            </li>
+          <% end %>
+        </ul>
+      </section>
     </div>
   </div>
 
